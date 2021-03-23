@@ -1,0 +1,19 @@
+.root{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    max-width: 80%;
+}
+
+.media{
+    padding-top: 56.25%;
+}
+
+.sort{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.list{
+    padding-top: 30px;
+}

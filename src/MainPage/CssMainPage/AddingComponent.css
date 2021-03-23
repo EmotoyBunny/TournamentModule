@@ -1,0 +1,60 @@
+.blockAll{
+    padding-top: 80px;
+    padding-bottom: 15%;
+}
+
+.blockGame{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.blockName{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.blockAddingPlayer{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.blockButton{
+    width: 100%;
+    text-align: center;
+}
+
+.blockCommand{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.doubleBlockButton{
+    display: inline;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button{
+    margin-bottom: 2%;
+}
+
+.select{
+    min-width: 200px;
+}
+
+.blockTourney{
+    padding-top: 100px;
+    padding-bottom: 15%;
+}
+
+.blockPlayers{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3%;
+    margin-left: 5px;
+    display: inline;
+}
