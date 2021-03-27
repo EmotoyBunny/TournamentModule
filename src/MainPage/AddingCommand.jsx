@@ -87,10 +87,7 @@ class AddingCommand extends Component {
                 });
             });
         }
-        this.setState({count: Math.floor(Math.random() * Math.floor(1000))});
-        while(localStorage.getItem(this.state.count)===null)
-            this.setState({count: Math.floor(Math.random() * Math.floor(1000))});
-        this.setState({arrayTeam: PassageLocal("player")});
+        this.setState({arrayTeam: PassageLocal("player"),count: Math.floor(Math.random() * Math.floor(1000))});
     }
 
 

@@ -90,10 +90,7 @@ class AddingPlayer extends Component {
                 });
             });
         }
-        this.setState({count: Math.floor(Math.random() * Math.floor(1000))});
-        while(localStorage.getItem(this.state.count)===null)
-            this.setState({count: Math.floor(Math.random() * Math.floor(1000))});
-        this.setState({arrayTeam: PassageLocal("command")});
+        this.setState({arrayTeam: PassageLocal("command"),count: Math.floor(Math.random() * Math.floor(1000))});
     }
 
 
