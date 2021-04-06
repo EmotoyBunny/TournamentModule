@@ -73,6 +73,7 @@ class AddingCommand extends Component {
             who: this.state.who
         };
         localStorage.setItem(command.id, JSON.stringify(command));
+        this.props.getData();
     };
 
 
@@ -87,7 +88,7 @@ class AddingCommand extends Component {
                 });
             });
         }
-        this.setState({arrayTeam: PassageLocal("player"),count: Math.floor(Math.random() * Math.floor(1000))});
+        this.setState({arrayTeam: PassageLocal("player"), count: Math.floor(Math.random() * Math.floor(1000))});
     }
 
 
@@ -107,7 +108,7 @@ class AddingCommand extends Component {
         if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "")
             return (
                 <Link to="/commandList">
-                    <Button variant="contained" color="default" size="large"
+                    <Button variant="contained" color="primary" size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Добавить
                     </Button>
@@ -117,7 +118,7 @@ class AddingCommand extends Component {
             return (
                 <Link to="/commandList">
                     <div className="button">
-                        <Button variant="contained" color="default" size="large"
+                        <Button variant="contained" color="primary" size="large"
                                 onClick={() => this.addItem(this.state.key)}>
                             Изменить
                         </Button>
@@ -189,6 +190,7 @@ class AddingCommand extends Component {
                         <form noValidate autoComplete="off">
                             <div>
                                 <TextField
+                                    className="text"
                                     required
                                     error={this.correctForm("name")}
                                     id="outlined-required"
@@ -205,6 +207,7 @@ class AddingCommand extends Component {
                     <FormControl required variant="filled">
                         <InputLabel>Игра</InputLabel>
                         <Select
+                            className="text"
                             native
                             error={this.correctForm("game")}
                             value={this.state.game}
@@ -251,7 +254,7 @@ class AddingCommand extends Component {
                             {this.playerList()}
                         </Select>
                     </FormControl>
-                    <Tooltip title="Добавить игрока">
+                    <Tooltip color="primary" title="Добавить игрока">
                         <IconButton onClick={() => this.addingPlayer()} aria-label="Добавить">
                             <LoupeIcon/>
                         </IconButton>
@@ -260,7 +263,7 @@ class AddingCommand extends Component {
                 <div className="blockCommand">
                     {this.outPutPlayer()}
                 </div>
-                <div className="blockButton">
+                <div className="blockButton1">
                     {this.chooseButton()}
                 </div>
             </div>

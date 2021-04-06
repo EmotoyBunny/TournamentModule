@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import List from "@material-ui/core/List";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
+import AddBoxIcon from "@material-ui/icons/AddBox";
 
 // components jsx
 import ChooseGameImg from "./CreatingDataStorageForm/ChooseGameImg";
@@ -66,7 +68,7 @@ class MainPage extends Component {
                         </div>);
                 }
             )
-        }else if(this.state.sortPlayer==="game")
+        } else if (this.state.sortPlayer === "game")
             listArray = this.state.array.sort((a, b) => a.game.localeCompare(b.game)).map((item) => {
                     return (
                         <div key={item.id}>
@@ -78,15 +80,8 @@ class MainPage extends Component {
             )
         return (
             <div className="block1">
-                <div className="blockButton">
-                    <Link to="/addingCommand">
-                        <Button variant="contained" color="default" size="large">
-                            Добавить
-                        </Button>
-                    </Link>
-                </div>
                 <div className="sort">
-                    <FormControl variant="outlined">
+                    <FormControl size="small" variant="outlined">
                         <InputLabel>Сортировка</InputLabel>
                         <Select
                             native
@@ -100,8 +95,17 @@ class MainPage extends Component {
                         </Select>
                     </FormControl>
                 </div>
+                <div className="blockButton">
+                    <Link to="/addingCommand">
+                        <Tooltip title="Добавить">
+                            <IconButton color="primary" aria-label="Добавить">
+                                <AddBoxIcon fontSize="large"/>
+                            </IconButton>
+                        </Tooltip>
+                    </Link>
+                </div>
                 <div className="list">
-                {listArray}
+                    {listArray}
                 </div>
             </div>
         );

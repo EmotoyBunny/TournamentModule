@@ -75,6 +75,7 @@ class AddingPlayer extends Component {
             who: this.state.who
         };
         localStorage.setItem(player.id, JSON.stringify(player));
+        this.props.getData();
     };
 
 
@@ -115,7 +116,7 @@ class AddingPlayer extends Component {
         if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3) {
             return (
                 <Link to="/playerList">
-                    <Button variant="contained" color="default" size="large"
+                    <Button variant="contained" color="primary"  size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Добавить
                     </Button>
@@ -124,7 +125,7 @@ class AddingPlayer extends Component {
         } else if (this.props.what === "edit" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3)
             return (
                 <Link to="/playerList">
-                    <Button variant="contained" color="default" size="large"
+                    <Button variant="contained" ccolor="primary" size="large"
                             onClick={() => this.addItem(this.state.keyForId)}>
                         Изменить
                     </Button>
@@ -146,6 +147,7 @@ class AddingPlayer extends Component {
                         <form noValidate autoComplete="off">
                             <div>
                                 <TextField
+                                    className="text"
                                     required
                                     error={this.correctForm()}
                                     label="Ваш никнейм"
@@ -161,6 +163,7 @@ class AddingPlayer extends Component {
                         <form noValidate autoComplete="off">
                             <div>
                                 <TextField
+                                    className="text"
                                     label="Ваше ФИО"
                                     variant="filled"
                                     name="fullName" value={this.state.fullName} onChange={this.handleChange}
@@ -173,6 +176,7 @@ class AddingPlayer extends Component {
                     <FormControl variant="filled">
                         <InputLabel>Игра</InputLabel>
                         <Select
+                            className="text"
                             native
                             value={this.state.game}
                             onChange={this.handleChange}
@@ -207,8 +211,8 @@ class AddingPlayer extends Component {
                     <FormControl variant="filled">
                         <InputLabel>Команда</InputLabel>
                         <Select
+                            className="text"
                             native
-                            className="select"
                             value={this.state.team}
                             onChange={this.handleChange}
                             label="Команда"
@@ -220,7 +224,7 @@ class AddingPlayer extends Component {
                         </Select>
                     </FormControl>
                 </div>
-                <div className="blockButton">
+                <div className="blockButton1">
                     {this.chooseButton()}
                 </div>
             </div>

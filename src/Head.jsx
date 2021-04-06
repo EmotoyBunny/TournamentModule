@@ -28,42 +28,74 @@ class Head extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            setValue: "Главная",
+            arrayCommand: [],
+            arrayPlayer: [],
         };
+
     }
 
-    profilesPlayers = PassageLocal("player").map((item, index) => {
-        return (<Route exact path={"/" + item.id} key={index}
-                       render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game} team={item.team}
-                                                          link="/playerList" fullName={item.fullName} who="player"/>}/>)
-    })
+
+    pushObjectCommand = () => {
+        this.setState({arrayCommand: PassageLocal("command")})
+    }
+
+    pushObjectPlayer = () => {
+        this.setState({arrayPlayer: PassageLocal("player")})
+    }
 
 
+    componentDidMount() {
+        this.pushObjectCommand();
+        this.pushObjectPlayer();
+    }
 
 
-    profilesCommands = PassageLocal("command").map((item, index) => {
-        return (<Route exact path={"/" + item.id} key={index}
-                       render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
-                                                          playerList={item.playerList}
-                                                          link="/commandList" who="command"/>}/>)
-    })
+    profilesCommands = () => {
+        return this.state.arrayCommand.map((item, index) => {
+            return (<Route exact path={"/" + item.id} key={index}
+                           render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
+                                                              playerList={item.playerList}
+                                                              link="/commandList" who="command"/>}/>)
+        });
+    }
+
+    profilesPlayers = () => {
+        return this.state.arrayPlayer.map((item, index) => {
+            return (<Route exact path={"/" + item.id} key={index}
+                           render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
+                                                              team={item.team}
+                                                              link="/playerList" fullName={item.fullName}
+                                                              who="player"/>}/>)
+        })
+    }
+
+    editProfileCommands = () => {
+        return this.state.arrayCommand.map((item, index) => {
+            return (<Route exact path={"/edit/" + item.id} key={index}
+                           render={(props) => <AddingCommand {...props} id={item.id} name={item.name} game={item.game}
+                                                             playerList={item.playerList}
+                                                             getData={() => this.pushObjectCommand()}
+                                                             array={this.state.array}
+                                                             what="edit"/>}/>)
+        })
+    }
+
+    editProfilePlayers = () => {
+        return this.state.arrayPlayer.map((item, index) => {
+            return (<Route exact path={"/edit/" + item.id} key={index}
+                           render={(props) => <AddingPlayer {...props} id={item.id} name={item.name} game={item.game}
+                                                            team={item.team}
+                                                            fullName={item.fullName}
+                                                            getData={() => this.pushObjectPlayer()}
+                                                            what="edit"/>}/>)
+        })
+    }
 
 
-    editProfileCommands = PassageLocal("command").map((item, index) => {
-        return (<Route exact path={"/edit/" + item.id} key={index}
-                       render={(props) => <AddingCommand {...props} id={item.id} name={item.name} game={item.game}
-                                                         playerList={item.playerList}
-                                                         what="edit"/>}/>)
-    })
-
-
-    editProfilePlayers = PassageLocal("player").map((item, index) => {
-        return (<Route exact path={"/edit/" + item.id} key={index}
-                       render={(props) => <AddingPlayer {...props} id={item.id} name={item.name} game={item.game} team={item.team}
-                                                        fullName={item.fullName}
-                                                        what="edit"/>}/>)
-    })
 
     render() {
+
         const customHistory = createBrowserHistory();
         return (
             <Router history={customHistory}>
@@ -72,35 +104,30 @@ class Head extends Component {
                         <div className="container1">
                             <AppBar position="fixed">
                                 <Tabs
-                                    aria-label="disabled tabs example"
+                                    value={this.state.setValue}
                                     centered
+                                    indicatorColor="primary"
+                                    textColor="inherit"
                                 >
-                                    <Link to="/">
-                                        <Tab label="Главная" icon={<ControlCameraOutlinedIcon/>}/>
-                                    </Link>
-                                    <Link to="/commandList">
-                                        <Tab icon={<PeopleAltOutlinedIcon/>} label="Команды"/>
-                                    </Link>
-                                    <Link to="/playerList">
-                                        <Tab icon={<PersonOutlineOutlinedIcon/>} label="Игроки"/>
-                                    </Link>
-                                    <Link to="/tourney">
-                                        <Tab icon={<WhatshotOutlinedIcon/>} label="Турниры"/>
-                                    </Link>
-
+                                    <Tab component={Link}  value="Главная" to="/" label="Главная" icon={<ControlCameraOutlinedIcon/>}/>
+                                    <Tab component={Link} value="Главная" to="/commandList" label="Команды"
+                                         icon={<PeopleAltOutlinedIcon/>}/>
+                                    <Tab component={Link} value="Главная" to="/playerList" icon={<PersonOutlineOutlinedIcon/>}
+                                         label="Игроки"/>
+                                    <Tab component={Link} value="Главная" to="/tourney" icon={<WhatshotOutlinedIcon/>} label="Турниры"/>
                                 </Tabs>
                             </AppBar>
                             <Switch>
-                                {this.profilesPlayers}
-                                {this.profilesCommands}
-                                {this.editProfileCommands}
-                                {this.editProfilePlayers}
+                                {this.profilesPlayers()}
+                                {this.profilesCommands()}
+                                {this.editProfileCommands()}
+                                {this.editProfilePlayers()}
                                 <Route exact path="/" render={(props) => <MainPage {...props} />}/>
                                 <Route exact path="/commandList" render={(props) => <MainPage {...props} />}/>
                                 <Route exact path="/addingCommand"
-                                       render={(props) => <AddingCommand {...props} what="create"/>}/>
+                                       render={(props) => <AddingCommand {...props} what="create"  getData={() => this.pushObjectCommand()}/>}/>
                                 <Route exact path="/addingPlayer"
-                                       render={(props) => <AddingPlayer {...props} what="create"/>}/>
+                                       render={(props) => <AddingPlayer {...props} what="create" getData={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/playerList" render={(props) => <MainPagePlayers {...props}/>}/>
                                 <Route exact path="/tourney" component={Tourney}/>
                                 <Route path="*" component={MainPage}/>

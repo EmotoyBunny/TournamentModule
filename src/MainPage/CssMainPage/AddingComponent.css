@@ -1,60 +1,71 @@
-.blockAll{
+.blockAll {
     padding-top: 80px;
     padding-bottom: 15%;
 }
 
-.blockGame{
+.blockGame {
     width: 100%;
     text-align: center;
     margin-bottom: 3%;
 }
 
-.blockName{
+.blockName {
     width: 100%;
     text-align: center;
     margin-bottom: 3%;
 }
 
-.blockAddingPlayer{
+.blockAddingPlayer {
     width: 100%;
     text-align: center;
     margin-bottom: 3%;
 }
 
-.blockButton{
+.blockButton {
+    display: inline-block;
+    width: 15%;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.blockButton1 {
     width: 100%;
     text-align: center;
 }
 
-.blockCommand{
+.blockCommand {
     width: 100%;
     text-align: center;
     margin-bottom: 3%;
 }
 
-.doubleBlockButton{
+.doubleBlockButton {
     display: inline;
     margin-left: auto;
     margin-right: auto;
 }
 
-.button{
+.button {
     margin-bottom: 2%;
 }
 
-.select{
-    min-width: 200px;
+.select {
+    width: 250px;
 }
 
-.blockTourney{
+.blockTourney {
     padding-top: 100px;
     padding-bottom: 15%;
 }
 
-.blockPlayers{
+.blockPlayers {
     width: 100%;
     text-align: center;
     margin-bottom: 3%;
     margin-left: 5px;
     display: inline;
+}
+
+.text {
+    width: 300px;
 }

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import List from "@material-ui/core/List";
-import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 // css table
 import "./CreatingDataStorageForm/CssTable/PlayerList.css"
@@ -62,7 +63,9 @@ class MainPagePlayers extends Component {
                     return (
                         <div key={item.id}>
                             <List className="root1">
-                                <PlayerList getData={this.pushObjectPlayer} item={item}/>
+                                <div>
+                                    <PlayerList getData={this.pushObjectPlayer} item={item}/>
+                                </div>
                             </List>
                         </div>);
                 }
@@ -72,22 +75,17 @@ class MainPagePlayers extends Component {
                     return (
                         <div key={item.id}>
                             <List className="root1">
-                                <PlayerList getData={this.pushObjectPlayer} item={item}/>
+                                <div>
+                                    <PlayerList getData={this.pushObjectPlayer} item={item}/>
+                                </div>
                             </List>
                         </div>);
                 }
             )
         return (
             <div className="block1">
-                <div className="blockButton">
-                    <Link to="/addingPlayer">
-                        <Button variant="contained" color="default" size="large">
-                            Добавить
-                        </Button>
-                    </Link>
-                </div>
                 <div className="sort">
-                    <FormControl variant="outlined">
+                    <FormControl size="small" variant="outlined">
                         <InputLabel>Сортировка</InputLabel>
                         <Select
                             native
@@ -100,6 +98,15 @@ class MainPagePlayers extends Component {
                             <option value={"game"}>По Игре</option>
                         </Select>
                     </FormControl>
+                </div>
+                <div className="blockButton">
+                    <Link to="/addingPlayer">
+                        <Tooltip title="Добавить">
+                            <IconButton color="primary" aria-label="Добавить">
+                                <AddBoxIcon fontSize="large"/>
+                            </IconButton>
+                        </Tooltip>
+                    </Link>
                 </div>
                 <div className="list">
                     {listArray}

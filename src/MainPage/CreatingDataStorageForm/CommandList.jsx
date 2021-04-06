@@ -1,25 +1,18 @@
 import React, {Component} from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Tooltip from '@material-ui/core/Tooltip';
-import {Link} from "react-router-dom";
-import PersonIcon from "@material-ui/icons/Person";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Avatar from "@material-ui/core/Avatar";
-import ListItemText from "@material-ui/core/ListItemText";
+
 
 // css table
 import "./CssTable/CommmandList.css"
 import PassageLocal from "./PassageLocal";
+import ListDesign from "../ListDesign";
+
 
 
 class CommandList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false,
+            modalOpened: false
         };
     }
 
@@ -47,37 +40,12 @@ class CommandList extends Component {
     };
 
 
+
     render() {
         return (
-            <div>
-                <Divider variant="inset" component="li"/>
-                <ListItem alignItems="flex-start">
-                    <Divider variant="inset" component="li"/>
-                    <ListItemAvatar>
-                        <Avatar variant='rounded' src={this.props.item.img}/>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={this.props.item.name}
-                        secondary={
-                            <React.Fragment>
-                                {this.props.item.game}
-                            </React.Fragment>
-                        }
-                    />
-                    <Link to={"/" + this.props.item.id}>
-                        <Tooltip title="Узнать больше">
-                            <IconButton aria-label="to learn more">
-                                <PersonIcon/>
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
-                    <Tooltip title="Удалить">
-                        <IconButton onClick={() => this.delete(this.props.item.id)} aria-label="delete">
-                            <DeleteIcon/>
-                        </IconButton>
-                    </Tooltip>
-                </ListItem>
-            </div>
+            <ListDesign img={this.props.item.img} name={this.props.item.name} id={this.props.item.id}
+                        game={this.props.item.game} getData={() => this.delete(this.props.item.id)}/>
+
         );
     }
 }

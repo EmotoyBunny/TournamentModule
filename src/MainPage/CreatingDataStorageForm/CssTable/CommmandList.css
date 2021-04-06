@@ -1,19 +1,26 @@
-.root{
+.root {
     margin-left: auto;
     margin-right: auto;
     margin-top: 2%;
     max-width: 80%;
 }
 
-.media{
+.media {
     padding-top: 56.25%;
 }
 
-.sort{
-    padding-top: 30px;
-    text-align: center;
+.sort {
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    width: 85%;
 }
 
-.list{
+.list {
     padding-top: 30px;
 }
+
+.block2 {
+    padding-top: 30px;
+}
+
