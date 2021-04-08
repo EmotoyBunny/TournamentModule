@@ -44,7 +44,7 @@ class CommandList extends Component {
     render() {
         return (
             <ListDesign img={this.props.item.img} name={this.props.item.name} id={this.props.item.id}
-                        game={this.props.item.game} getData={() => this.delete(this.props.item.id)}/>
+                        game={this.props.item.game} getData={() => this.delete(this.props.item.id)} who={this.props.item.who}/>
 
         );
     }

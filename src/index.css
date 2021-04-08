@@ -22,5 +22,5 @@ a:link{
 
 a:visited{
   text-decoration: none;
-  color: ivory;
+  color: inherit;
 }

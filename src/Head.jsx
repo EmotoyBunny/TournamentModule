@@ -1,15 +1,10 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 
 import AppBar from '@material-ui/core/AppBar';
 import Container from "@material-ui/core/Container";
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import ControlCameraOutlinedIcon from '@material-ui/icons/ControlCameraOutlined';
-import WhatshotOutlinedIcon from '@material-ui/icons/WhatshotOutlined';
-import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
-import PersonOutlineOutlinedIcon from '@material-ui/icons/PersonOutlineOutlined';
+
 
 // css table
 import "./Head.css"
@@ -22,13 +17,14 @@ import MainPagePlayers from "./MainPage/PagePlayersList";
 import PassageLocal from "./MainPage/CreatingDataStorageForm/PassageLocal";
 import ProfilesPlayer from "./MainPage/CreatingDataStorageForm/ProfilePlayer";
 import Tourney from "./MainPage/Tourney";
+import TabsAppBar from "./Tabs";
 
 
 class Head extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            setValue: "Главная",
+
             arrayCommand: [],
             arrayPlayer: [],
         };
@@ -66,7 +62,7 @@ class Head extends Component {
                            render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
                                                               team={item.team}
                                                               link="/playerList" fullName={item.fullName}
-                                                              who="player"/>}/>)
+                                                              who="player"/>} />)
         })
     }
 
@@ -75,7 +71,8 @@ class Head extends Component {
             return (<Route exact path={"/edit/" + item.id} key={index}
                            render={(props) => <AddingCommand {...props} id={item.id} name={item.name} game={item.game}
                                                              playerList={item.playerList}
-                                                             getData={() => this.pushObjectCommand()}
+                                                             getDataCommand={() => this.pushObjectCommand()}
+                                                             getDataPlayers={() => this.pushObjectPlayer()}
                                                              array={this.state.array}
                                                              what="edit"/>}/>)
         })
@@ -87,15 +84,14 @@ class Head extends Component {
                            render={(props) => <AddingPlayer {...props} id={item.id} name={item.name} game={item.game}
                                                             team={item.team}
                                                             fullName={item.fullName}
-                                                            getData={() => this.pushObjectPlayer()}
+                                                            getDataCommand={() => this.pushObjectCommand()}
+                                                            getDataPlayers={() => this.pushObjectPlayer()}
                                                             what="edit"/>}/>)
         })
     }
 
 
-
     render() {
-
         const customHistory = createBrowserHistory();
         return (
             <Router history={customHistory}>
@@ -103,19 +99,7 @@ class Head extends Component {
                     <Container maxWidth='md'>
                         <div className="container1">
                             <AppBar position="fixed">
-                                <Tabs
-                                    value={this.state.setValue}
-                                    centered
-                                    indicatorColor="primary"
-                                    textColor="inherit"
-                                >
-                                    <Tab component={Link}  value="Главная" to="/" label="Главная" icon={<ControlCameraOutlinedIcon/>}/>
-                                    <Tab component={Link} value="Главная" to="/commandList" label="Команды"
-                                         icon={<PeopleAltOutlinedIcon/>}/>
-                                    <Tab component={Link} value="Главная" to="/playerList" icon={<PersonOutlineOutlinedIcon/>}
-                                         label="Игроки"/>
-                                    <Tab component={Link} value="Главная" to="/tourney" icon={<WhatshotOutlinedIcon/>} label="Турниры"/>
-                                </Tabs>
+                                <TabsAppBar />
                             </AppBar>
                             <Switch>
                                 {this.profilesPlayers()}
@@ -136,7 +120,6 @@ class Head extends Component {
                     </Container>
                 </div>
             </Router>
-
         );
     }
 }

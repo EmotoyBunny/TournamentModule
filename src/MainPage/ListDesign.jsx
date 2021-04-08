@@ -16,7 +16,7 @@ import DoneAllIcon from '@material-ui/icons/DoneAll';
 import CloseIcon from '@material-ui/icons/Close';
 
 
-class  ListDesign extends Component {
+class ListDesign extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,25 +32,52 @@ class  ListDesign extends Component {
         this.setState({modalOpened: false});
     };
 
+    info = (who) => {
+        if (who === "player" && this.props.team !== "") {
+            return (<ListItemText
+                    primary={this.props.name}
+                    secondary={
+                        <div>
+                            <div className="blockForList">
+                                <React.Fragment>
+                                    {this.props.game}
+                                </React.Fragment>
+                            </div>
+                            <div className="blockForList">
+                                <React.Fragment>
+                                    Участник команды: {this.props.team}
+                                </React.Fragment>
+                            </div>
+                        </div>
+                    }
+                />
+            );
+        } else {
+            return (
+                <ListItemText
+                    primary={this.props.name}
+                    secondary={
+                        <React.Fragment>
+                            {this.props.game}
+                        </React.Fragment>
+                    }
+                />
+            );
+        }
+    }
+
 
     render() {
         return (
             <div>
-                <Divider variant="inset" />
+                <Divider variant="inset"/>
                 <div>
                     <ListItem alignItems="flex-start">
-                        <Divider variant="inset" />
-                        <ListItemAvatar>
+                        <Divider variant="inset"/>
+                        <ListItemAvatar className="avatarAndButton">
                             <Avatar variant='rounded' src={this.props.img}/>
                         </ListItemAvatar>
-                        <ListItemText
-                            primary={this.props.name}
-                            secondary={
-                                <React.Fragment>
-                                    {this.props.game}
-                                </React.Fragment>
-                            }
-                        />
+                        {this.info(this.props.who)}
                         <Link to={"/" + this.props.id}>
                             <Tooltip color="primary" title="Узнать больше">
                                 <IconButton aria-label="to learn more">

@@ -39,7 +39,6 @@ class AddingCommand extends Component {
     handleChange = (event) => {
         const {name, value} = event.target;
         this.setState({[name]: value});
-
     };
 
     /**
@@ -73,7 +72,8 @@ class AddingCommand extends Component {
             who: this.state.who
         };
         localStorage.setItem(command.id, JSON.stringify(command));
-        this.props.getData();
+        this.props.getDataPlayers();
+        this.props.getDataCommand();
     };
 
 

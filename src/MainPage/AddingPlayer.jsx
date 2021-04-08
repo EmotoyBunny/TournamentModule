@@ -75,7 +75,8 @@ class AddingPlayer extends Component {
             who: this.state.who
         };
         localStorage.setItem(player.id, JSON.stringify(player));
-        this.props.getData();
+        this.props.getDataPlayers();
+        this.props.getDataCommand();
     };
 
 

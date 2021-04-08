@@ -25,7 +25,7 @@
     display: inline-block;
     width: 15%;
     vertical-align: middle;
-    text-align: left;
+    text-align:right;
 }
 
 .blockButton1 {
@@ -69,3 +69,4 @@
 .text {
     width: 300px;
 }
+

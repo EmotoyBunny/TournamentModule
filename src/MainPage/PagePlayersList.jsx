@@ -84,6 +84,15 @@ class MainPagePlayers extends Component {
             )
         return (
             <div className="block1">
+                <div className="blockButton">
+                    <Link to="/addingPlayer">
+                        <Tooltip title="Добавить">
+                            <IconButton color="primary" aria-label="Добавить">
+                                <AddBoxIcon fontSize="large"/>
+                            </IconButton>
+                        </Tooltip>
+                    </Link>
+                </div>
                 <div className="sort">
                     <FormControl size="small" variant="outlined">
                         <InputLabel>Сортировка</InputLabel>
@@ -98,15 +107,6 @@ class MainPagePlayers extends Component {
                             <option value={"game"}>По Игре</option>
                         </Select>
                     </FormControl>
-                </div>
-                <div className="blockButton">
-                    <Link to="/addingPlayer">
-                        <Tooltip title="Добавить">
-                            <IconButton color="primary" aria-label="Добавить">
-                                <AddBoxIcon fontSize="large"/>
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
                 </div>
                 <div className="list">
                     {listArray}

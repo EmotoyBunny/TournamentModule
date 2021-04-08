@@ -27,18 +27,27 @@ const useStyles = makeStyles((theme) => ({
     },
     section1: {
         width: '100%',
-        height: 140,
+        height: 170,
     },
     section2: {
         margin: 20,
     },
     section4: {
-        marginLeft: 20,
-        float: "left",
-        textAlign: "left",
+        display: "inline-block",
+        verticalAlign: "middle",
+    },
+    section6: {
+        display: "inline-block",
+        marginLeft: 30,
+        verticalAlign: "middle",
     },
     section5: {
-        float: "right"
+        marginLeft: 50,
+        textAlign: "left",
+    },
+    section7: {
+        marginLeft: 60,
+        textAlign: "left",
     },
     section3: {
         paddingTop: 20,
@@ -174,33 +183,35 @@ export default function ProfilesPlayer(props) {
     return (
         <div className={classes.root}>
             <div className={classes.section1}>
-                <div className={classes.section4}>
-                    <Avatar variant='rounded' className={classes.large} src={chooseGame(props.game)}/>
-                </div>
-                <div className={classes.section4}>
-                    <Typography variant="h4">
-                        {props.name}
-                    </Typography>
-                    {fullName}
-                    <Typography color="textSecondary" variant="body2">
-                        {chooseGameName(props.game)}
-                    </Typography>
-                </div>
                 <div className={classes.section5}>
                     <Link to={"/edit/" + props.id}>
                         <Tooltip title="Изменить">
                             <IconButton color="primary" aria-label="edit">
-                                <CreateIcon/>
+                                <CreateIcon fontSize="large"/>
                             </IconButton>
                         </Tooltip>
                     </Link>
                     <Link to={props.link}>
                         <Tooltip title="Вернуться назад">
                             <IconButton color="primary" aria-label="back">
-                                <ExitToAppIcon/>
+                                <ExitToAppIcon fontSize="large"/>
                             </IconButton>
                         </Tooltip>
                     </Link>
+                </div>
+                <div className={classes.section7}>
+                    <div className={classes.section4}>
+                        <Avatar variant='rounded' className={classes.large} src={chooseGame(props.game)}/>
+                    </div>
+                    <div className={classes.section6}>
+                        <Typography variant="h4">
+                            {props.name}
+                        </Typography>
+                        {fullName}
+                        <Typography color="textSecondary" variant="body2">
+                            {chooseGameName(props.game)}
+                        </Typography>
+                    </div>
                 </div>
             </div>
             <Divider variant="middle"/>

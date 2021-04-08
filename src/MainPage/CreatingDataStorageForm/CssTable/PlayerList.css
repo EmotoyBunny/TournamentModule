@@ -11,3 +11,10 @@
     text-align: center;
 }
 
+.blockForList {
+    display: block;
+}
+
+.avatarAndButton{
+    vertical-align: middle;
+}
