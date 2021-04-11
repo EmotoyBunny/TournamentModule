@@ -41,6 +41,7 @@ class AddingCommand extends Component {
         this.setState({[name]: value});
     };
 
+
     /**
      * Метод добавления введеных данных команды в localStorage с последующей проверкой
      * на присутствии игрока из полученных данных и уже существующего в localeStorage.
@@ -117,12 +118,10 @@ class AddingCommand extends Component {
         else if (this.props.what === "edit" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "")
             return (
                 <Link to="/commandList">
-                    <div className="button">
                         <Button variant="contained" color="primary" size="large"
                                 onClick={() => this.addItem(this.state.key)}>
                             Изменить
                         </Button>
-                    </div>
                 </Link>
             );
         else

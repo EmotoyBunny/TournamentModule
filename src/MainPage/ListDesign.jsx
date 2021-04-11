@@ -14,6 +14,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import CloseIcon from '@material-ui/icons/Close';
+import Typography from "@material-ui/core/Typography";
 
 
 class ListDesign extends Component {
@@ -37,7 +38,7 @@ class ListDesign extends Component {
             return (<ListItemText
                     primary={this.props.name}
                     secondary={
-                        <div>
+                        <Typography color="textSecondary" component={'span'}>
                             <div className="blockForList">
                                 <React.Fragment>
                                     {this.props.game}
@@ -48,7 +49,7 @@ class ListDesign extends Component {
                                     Участник команды: {this.props.team}
                                 </React.Fragment>
                             </div>
-                        </div>
+                        </Typography>
                     }
                 />
             );

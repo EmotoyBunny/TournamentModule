@@ -63,9 +63,7 @@ class MainPagePlayers extends Component {
                     return (
                         <div key={item.id}>
                             <List className="root1">
-                                <div>
                                     <PlayerList getData={this.pushObjectPlayer} item={item}/>
-                                </div>
                             </List>
                         </div>);
                 }
@@ -75,9 +73,7 @@ class MainPagePlayers extends Component {
                     return (
                         <div key={item.id}>
                             <List className="root1">
-                                <div>
                                     <PlayerList getData={this.pushObjectPlayer} item={item}/>
-                                </div>
                             </List>
                         </div>);
                 }

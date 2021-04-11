@@ -107,7 +107,6 @@ class MainPage extends Component {
                 <div className="list">
                     {listArray}
                 </div>
-
             </div>
         );
     }

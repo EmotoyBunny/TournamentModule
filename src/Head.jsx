@@ -24,7 +24,6 @@ class Head extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             arrayCommand: [],
             arrayPlayer: [],
         };
@@ -33,12 +32,13 @@ class Head extends Component {
 
 
     pushObjectCommand = () => {
-        this.setState({arrayCommand: PassageLocal("command")})
+        this.setState({arrayCommand: PassageLocal("command")});
     }
 
     pushObjectPlayer = () => {
-        this.setState({arrayPlayer: PassageLocal("player")})
+        this.setState({arrayPlayer: PassageLocal("player")});
     }
+
 
 
     componentDidMount() {
@@ -62,7 +62,7 @@ class Head extends Component {
                            render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
                                                               team={item.team}
                                                               link="/playerList" fullName={item.fullName}
-                                                              who="player"/>} />)
+                                                              who="player"/>}/>)
         })
     }
 
@@ -99,7 +99,7 @@ class Head extends Component {
                     <Container maxWidth='md'>
                         <div className="container1">
                             <AppBar position="fixed">
-                                <TabsAppBar />
+                                <TabsAppBar/>
                             </AppBar>
                             <Switch>
                                 {this.profilesPlayers()}
@@ -109,9 +109,13 @@ class Head extends Component {
                                 <Route exact path="/" render={(props) => <MainPage {...props} />}/>
                                 <Route exact path="/commandList" render={(props) => <MainPage {...props} />}/>
                                 <Route exact path="/addingCommand"
-                                       render={(props) => <AddingCommand {...props} what="create"  getData={() => this.pushObjectCommand()}/>}/>
+                                       render={(props) => <AddingCommand {...props} what="create"
+                                                                         getDataCommand={() => this.pushObjectCommand()}
+                                                                         getDataPlayers={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/addingPlayer"
-                                       render={(props) => <AddingPlayer {...props} what="create" getData={() => this.pushObjectPlayer()}/>}/>
+                                       render={(props) => <AddingPlayer {...props} what="create"
+                                                                        getDataCommand={() => this.pushObjectCommand()}
+                                                                        getDataPlayers={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/playerList" render={(props) => <MainPagePlayers {...props}/>}/>
                                 <Route exact path="/tourney" component={Tourney}/>
                                 <Route path="*" component={MainPage}/>

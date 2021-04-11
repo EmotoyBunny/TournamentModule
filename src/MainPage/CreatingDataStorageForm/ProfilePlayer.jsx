@@ -16,7 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
 import List from "@material-ui/core/List";
 import ChooseGameImg from "./ChooseGameImg";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
     },
     section7: {
+        paddingTop:20,
         marginLeft: 60,
         textAlign: "left",
     },
@@ -184,17 +185,17 @@ export default function ProfilesPlayer(props) {
         <div className={classes.root}>
             <div className={classes.section1}>
                 <div className={classes.section5}>
+                    <Link to={props.link}>
+                        <Tooltip title="Вернуться назад">
+                            <IconButton color="primary" aria-label="back">
+                                <BackspaceIcon fontSize="large"/>
+                            </IconButton>
+                        </Tooltip>
+                    </Link>
                     <Link to={"/edit/" + props.id}>
                         <Tooltip title="Изменить">
                             <IconButton color="primary" aria-label="edit">
                                 <CreateIcon fontSize="large"/>
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
-                    <Link to={props.link}>
-                        <Tooltip title="Вернуться назад">
-                            <IconButton color="primary" aria-label="back">
-                                <ExitToAppIcon fontSize="large"/>
                             </IconButton>
                         </Tooltip>
                     </Link>
@@ -204,11 +205,11 @@ export default function ProfilesPlayer(props) {
                         <Avatar variant='rounded' className={classes.large} src={chooseGame(props.game)}/>
                     </div>
                     <div className={classes.section6}>
-                        <Typography variant="h4">
+                        <Typography component={'span'} variant="h4">
                             {props.name}
                         </Typography>
                         {fullName}
-                        <Typography color="textSecondary" variant="body2">
+                        <Typography component={'span'} color="textSecondary" variant="body2">
                             {chooseGameName(props.game)}
                         </Typography>
                     </div>

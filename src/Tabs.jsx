@@ -8,7 +8,7 @@ import PersonOutlineOutlinedIcon from "@material-ui/icons/PersonOutlineOutlined"
 import WhatshotOutlinedIcon from "@material-ui/icons/WhatshotOutlined";
 
 export default function TabsAppBar() {
-    const [value, setValue] = React.useState(2);
+    const [value, setValue] = React.useState("Главная");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

@@ -26,7 +26,7 @@ class AddingPlayer extends Component {
             keyFoId: "",
             keyForTeam: "",
             correctButton: true,
-            count:0,
+            count: 0,
         };
     }
 
@@ -37,7 +37,7 @@ class AddingPlayer extends Component {
 
 
     addItem = (id) => {
-        if (this.state.team !== "") {
+        if (this.state.team !== "" && this.props.name === undefined) {
             for (let i = 0; i < this.state.arrayTeam.length; i++) {
                 if (this.state.arrayTeam[i].name === this.state.team) {
                     this.state.arrayTeam[i].playerList.push(this.state.name);
@@ -52,17 +52,39 @@ class AddingPlayer extends Component {
                 }
             }
         }
-        if (this.state.team !== this.props.team) {
-            for (let i = 0; i < this.state.arrayTeam.length; i++) {
-                if (this.state.arrayTeam[i].name === this.props.team) {
-                    const command = {
-                        id: this.state.arrayTeam[i].id,
-                        name: this.state.arrayTeam[i].name,
-                        game: this.state.arrayTeam[i].game,
-                        playerList: this.state.arrayTeam[i].playerList.filter(item => item !== JSON.parse(localStorage.getItem(this.state.id)).name),
-                        who: "command"
-                    };
-                    localStorage.setItem(command.id, JSON.stringify(command));
+        if (this.props.what === "edit") {
+            if (this.state.team !== this.props.team) {
+                for (let i = 0; i < this.state.arrayTeam.length; i++) {
+                    if (this.state.arrayTeam[i].name === this.props.team) {
+                        const command = {
+                            id: this.state.arrayTeam[i].id,
+                            name: this.state.arrayTeam[i].name,
+                            game: this.state.arrayTeam[i].game,
+                            playerList: this.state.arrayTeam[i].playerList.filter(item => item !== JSON.parse(localStorage.getItem(this.state.keyForId)).name),
+                            who: "command"
+                        };
+                        localStorage.setItem(command.id, JSON.stringify(command));
+                    }
+                }
+            }
+            if (this.state.name !== this.props.name) {
+                for (let i = 0; i < this.state.arrayTeam.length; i++) {
+                    if (this.state.arrayTeam[i].name === this.props.team) {
+                        let list = this.state.arrayTeam[i].playerList;
+                        for (let j = 0; j < list.length; j++) {
+                            if (list[j] === this.props.name) {
+                                list[j] = this.state.name;
+                                const command = {
+                                    id: this.state.arrayTeam[i].id,
+                                    name: this.state.arrayTeam[i].name,
+                                    game: this.state.arrayTeam[i].game,
+                                    playerList: list,
+                                    who: "command"
+                                };
+                                localStorage.setItem(command.id, JSON.stringify(command));
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -92,7 +114,7 @@ class AddingPlayer extends Component {
                 });
             });
         }
-        this.setState({arrayTeam: PassageLocal("command"),count: Math.floor(Math.random() * Math.floor(1000))});
+        this.setState({arrayTeam: PassageLocal("command"), count: Math.floor(Math.random() * Math.floor(1000))});
     }
 
 
@@ -117,7 +139,7 @@ class AddingPlayer extends Component {
         if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3) {
             return (
                 <Link to="/playerList">
-                    <Button variant="contained" color="primary"  size="large"
+                    <Button variant="contained" color="primary" size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Добавить
                     </Button>
