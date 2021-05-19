@@ -18,6 +18,9 @@ import PassageLocal from "./MainPage/CreatingDataStorageForm/PassageLocal";
 import ProfilesPlayer from "./MainPage/CreatingDataStorageForm/ProfilePlayer";
 import Tourney from "./MainPage/Tourney";
 import TabsAppBar from "./Tabs";
+import AddingTourney from "./MainPage/AddingTourney";
+import AddingFormatTourney from "./MainPage/AddingFormatTourney";
+import TourneyGrid from "./MainPage/TourneyGrid";
 
 
 class Head extends Component {
@@ -26,10 +29,16 @@ class Head extends Component {
         this.state = {
             arrayCommand: [],
             arrayPlayer: [],
+            arrayTourney: [],
+            listFormat: ["player1", "player2", "player3", "player4", "player5", "player6", "player7", "player8"]
         };
 
     }
 
+
+    pushObjectTourney = () => {
+        this.setState({arrayTourney: PassageLocal("tourney")});
+    }
 
     pushObjectCommand = () => {
         this.setState({arrayCommand: PassageLocal("command")});
@@ -40,10 +49,10 @@ class Head extends Component {
     }
 
 
-
     componentDidMount() {
         this.pushObjectCommand();
         this.pushObjectPlayer();
+        this.pushObjectTourney();
     }
 
 
@@ -66,11 +75,25 @@ class Head extends Component {
         })
     }
 
+    profilesTourney = () => {
+        return this.state.arrayTourney.map((item, index) => {
+            return (<Route exact path={"/" + item.id} key={index}
+                           render={(props) => <ProfilesPlayer {...props} id={item.id} name={item.name} game={item.game}
+                                                              link="/tourneyList" prizeFund={item.prizeFund}
+                                                              gridTourney={item.gridTourney}
+                                                              status={item.status} format={item.format}
+                                                              listFormat={item.listFormat}
+                                                              who="tourney"
+                                                              getDataTourney={() => this.pushObjectTourney()}/>}/>)
+        })
+    }
+
     editProfileCommands = () => {
         return this.state.arrayCommand.map((item, index) => {
             return (<Route exact path={"/edit/" + item.id} key={index}
                            render={(props) => <AddingCommand {...props} id={item.id} name={item.name} game={item.game}
                                                              playerList={item.playerList}
+                                                             getDataTourney={() => this.pushObjectTourney()}
                                                              getDataCommand={() => this.pushObjectCommand()}
                                                              getDataPlayers={() => this.pushObjectPlayer()}
                                                              array={this.state.array}
@@ -84,10 +107,52 @@ class Head extends Component {
                            render={(props) => <AddingPlayer {...props} id={item.id} name={item.name} game={item.game}
                                                             team={item.team}
                                                             fullName={item.fullName}
+                                                            getDataTourney={() => this.pushObjectTourney()}
                                                             getDataCommand={() => this.pushObjectCommand()}
                                                             getDataPlayers={() => this.pushObjectPlayer()}
                                                             what="edit"/>}/>)
         })
+    }
+
+    editProfileTourney = () => {
+        return this.state.arrayTourney.map((item, index) => {
+            return (<Route exact path={"/edit/" + item.id} key={index}
+                           render={(props) => <AddingTourney {...props} id={item.id} name={item.name} game={item.game}
+                                                             link="/tourneyList" prizeFund={item.prizeFund}
+                                                             status={item.status}
+                                                             format={item.format}
+                                                             listFormat={item.listFormat}
+                                                             getDataTourney={() => this.pushObjectTourney()}
+                                                             getDataCommand={() => this.pushObjectCommand()}
+                                                             getDataPlayers={() => this.pushObjectPlayer()}
+                                                             gridTourney={item.gridTourney}
+                                                             what="edit"/>}/>)
+        })
+    }
+
+    addingTourneyFormat = () => {
+        return this.state.arrayTourney.map((item, index) => {
+            return (<Route exact path={"/addingFormatTourney/" + item.id} key={index}
+                           render={(props) => <AddingFormatTourney {...props} id={item.id} what="create"
+                                                                   format={item.format}
+                                                                   gridTourney={item.gridTourney}
+                                                                   getDataTourney={() => this.pushObjectTourney()}
+                                                                   getDataCommand={() => this.pushObjectCommand()}
+                                                                   getDataPlayers={() => this.pushObjectPlayer()}/>}/>)
+        });
+    }
+
+    editTourneyFormat = () => {
+        return this.state.arrayTourney.map((item, index) => {
+            return (<Route exact path={"/editFormatTourney/" + item.id} key={index}
+                           render={(props) => <AddingFormatTourney {...props} id={item.id} what="edit"
+                                                                   format={item.format}
+                                                                   listFormat={item.listFormat}
+                                                                   gridTourney={item.gridTourney}
+                                                                   getDataTourney={() => this.pushObjectTourney()}
+                                                                   getDataCommand={() => this.pushObjectCommand()}
+                                                                   getDataPlayers={() => this.pushObjectPlayer()}/>}/>)
+        });
     }
 
 
@@ -104,16 +169,34 @@ class Head extends Component {
                             <Switch>
                                 {this.profilesPlayers()}
                                 {this.profilesCommands()}
+                                {this.profilesTourney()}
                                 {this.editProfileCommands()}
                                 {this.editProfilePlayers()}
+                                {this.editProfileTourney()}
+                                {this.editTourneyFormat()}
+                                {this.addingTourneyFormat()}
                                 <Route exact path="/" render={(props) => <MainPage {...props} />}/>
                                 <Route exact path="/commandList" render={(props) => <MainPage {...props} />}/>
+                                <Route exact path="/tourneyGrid" render={(props) => <TourneyGrid {...props}
+                                                                                                 listFormat={this.state.listFormat}/>}/>
+                                <Route exact path="/addingTourney"
+                                       render={(props) => <AddingTourney {...props} what="create"
+                                                                         getDataTourney={() => this.pushObjectTourney()}
+                                                                         getDataCommand={() => this.pushObjectCommand()}
+                                                                         getDataPlayers={() => this.pushObjectPlayer()}/>}/>
+                                <Route exact path="/addingFormatTourney"
+                                       render={(props) => <AddingFormatTourney {...props} what="create"
+                                                                               getDataTourney={() => this.pushObjectTourney()}
+                                                                               getDataCommand={() => this.pushObjectCommand()}
+                                                                               getDataPlayers={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/addingCommand"
                                        render={(props) => <AddingCommand {...props} what="create"
+                                                                         getDataTourney={() => this.pushObjectTourney()}
                                                                          getDataCommand={() => this.pushObjectCommand()}
                                                                          getDataPlayers={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/addingPlayer"
                                        render={(props) => <AddingPlayer {...props} what="create"
+                                                                        getDataTourney={() => this.pushObjectTourney()}
                                                                         getDataCommand={() => this.pushObjectCommand()}
                                                                         getDataPlayers={() => this.pushObjectPlayer()}/>}/>
                                 <Route exact path="/playerList" render={(props) => <MainPagePlayers {...props}/>}/>

@@ -19,6 +19,8 @@ import ChooseGameImg from "./ChooseGameImg";
 import BackspaceIcon from '@material-ui/icons/Backspace';
 
 
+import TourneyGrid from "../TourneyGrid";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -41,12 +43,18 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 30,
         verticalAlign: "middle",
     },
+    section8: {
+        display: "inline-block",
+        marginLeft: 30,
+        verticalAlign: "middle",
+        textAlign: "right"
+    },
     section5: {
         marginLeft: 50,
         textAlign: "left",
     },
     section7: {
-        paddingTop:20,
+        paddingTop: 20,
         marginLeft: 60,
         textAlign: "left",
     },
@@ -71,7 +79,8 @@ export default function ProfilesPlayer(props) {
     let fullName = "";
     let arrayPlayers = [];
     let nameTeam;
-
+    let gridTourney;
+    let status;
 
     if (props.who === "player") {
         if (props.fullName !== "")
@@ -128,7 +137,7 @@ export default function ProfilesPlayer(props) {
                     </Typography>
                 </div>
         }
-    } else {
+    } else if (props.who === "command") {
         if (props.playerList.length === 0) {
             nameTeam = <div className={classes.section2}>
                 <Typography component={'span'} variant="body1">
@@ -179,6 +188,101 @@ export default function ProfilesPlayer(props) {
                 </Typography>
             </div>;
         }
+    } else if (props.who === "tourney") {
+        let listFormat = [];
+        if (props.format === "player")
+            listFormat = PassageLocal("player");
+        else
+            listFormat = PassageLocal("command");
+        let team;
+
+        arrayPlayers = props.listFormat.map((items, index) => {
+            for (let i = 0; i < listFormat.length; i++) {
+                if (listFormat[i].name === items) {
+                    if (listFormat[i].team !== "")
+                        team = <ListItemText
+                            primary={listFormat[i].name}
+                            secondary={
+                                <Typography color="textSecondary" component={'span'}>
+                                    <div className="blockForList">
+                                        <React.Fragment>
+                                            {listFormat[i].game}
+                                        </React.Fragment>
+                                    </div>
+                                    <div className="blockForList">
+                                        <React.Fragment>
+                                            Участник команды: {listFormat[i].team}
+                                        </React.Fragment>
+                                    </div>
+                                </Typography>
+                            }
+                        />
+                    else
+                        team = <ListItemText
+                            primary={listFormat[i].name}
+                            secondary={
+                                <React.Fragment>
+                                    {listFormat[i].game}
+                                </React.Fragment>
+                            }
+                        />
+                    return (
+                        <div key={index} className={classes.div}>
+                            <List className={classes.root1}>
+                                <Divider variant="inset"/>
+                                <ListItem alignItems="flex-start">
+                                    <Divider variant="inset"/>
+                                    <ListItemAvatar>
+                                        <Avatar variant='rounded' src={ChooseGameImg(listFormat[i].game)}/>
+                                    </ListItemAvatar>
+                                    {team}
+                                    <Link to={"/" + listFormat[i].id}>
+                                        <Tooltip title="Узнать больше">
+                                            <IconButton color="primary" aria-label="to learn more">
+                                                <PersonIcon/>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Link>
+                                </ListItem>
+                                <Divider variant="inset"/>
+                            </List>
+                        </div>
+                    )
+                }
+            }
+            return null;
+        });
+
+        if (props.listFormat.length !== 0) {
+            nameTeam =
+                <div>
+                    <Typography component={'span'} className={classes.section3} variant="body1">
+                        Участники турнира: {arrayPlayers}
+                    </Typography>
+                </div>
+        }
+        if ((props.listFormat.length === 2 || props.listFormat.length % 4 === 0) && props.listFormat.length !== 0)
+            gridTourney = <TourneyGrid listFormat={props.listFormat} id={props.id} gridTourney={props.gridTourney}
+                                       getDataTourney={props.getDataTourney}/>
+        if (props.status === "stop") {
+            status = <div>
+                <Typography component={'span'} className={classes.section3} variant="body1">
+                    Статус: Завершен
+                </Typography>
+            </div>
+        } else if (props.status === "start") {
+            status = <div>
+                <Typography component={'span'} className={classes.section3} variant="body1">
+                    Статус: Начат
+                </Typography>
+            </div>
+        } else if (props.status === "edit") {
+            status = <div>
+                <Typography component={'span'} className={classes.section3} variant="body1">
+                    Статус: Редактируется
+                </Typography>
+            </div>
+        }
     }
 
     return (
@@ -209,14 +313,24 @@ export default function ProfilesPlayer(props) {
                             {props.name}
                         </Typography>
                         {fullName}
-                        <Typography component={'span'} color="textSecondary" variant="body2">
-                            {chooseGameName(props.game)}
+                        <div className={classes.section6}>
+                            <Typography component={'span'} color="textSecondary" variant="body2">
+                                {chooseGameName(props.game)}
+                            </Typography>
+                        </div>
+                    </div>
+                    <div className={classes.section8}>
+                        <Typography component={'span'} variant="h4">
+                            {status}
                         </Typography>
                     </div>
                 </div>
             </div>
             <Divider variant="middle"/>
             {nameTeam}
+            <Divider variant="middle"/>
+            {gridTourney}
+            <Divider variant="middle"/>
         </div>
     );
 }

@@ -33,6 +33,16 @@
     text-align: center;
 }
 
+.blockButton5 {
+    display: inline;
+    text-align: center;
+}
+
+.blockButton6 {
+   margin: 20px;
+}
+
+
 .blockCommand {
     width: 100%;
     text-align: center;

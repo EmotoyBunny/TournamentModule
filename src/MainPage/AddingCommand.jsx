@@ -17,6 +17,7 @@ import "./CssMainPage/AddingComponent.css"
 import PassageLocal from "./CreatingDataStorageForm/PassageLocal";
 import Tooltip from "@material-ui/core/Tooltip";
 
+
 class AddingCommand extends Component {
     constructor(props) {
         super(props);
@@ -24,8 +25,6 @@ class AddingCommand extends Component {
             name: "",
             game: "",
             playerList: [],
-            correctName: false,
-            correctGame: false,
             who: "command",
             key: "",
             array: [],

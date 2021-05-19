@@ -15,6 +15,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from "@material-ui/core/Typography";
+import chooseStatus from "./CreatingDataStorageForm/chooseStatus";
+import chooseFormatForList from "./CreatingDataStorageForm/chooseFormatForList";
 
 
 class ListDesign extends Component {
@@ -53,6 +55,30 @@ class ListDesign extends Component {
                     }
                 />
             );
+        } else if (who === "tourney") {
+            return (<ListItemText
+                    primary={this.props.name}
+                    secondary={
+                        <Typography color="textSecondary" component={'span'}>
+                            <div className="blockForList">
+                                <React.Fragment>
+                                    {this.props.game}
+                                </React.Fragment>
+                            </div>
+                            <div className="blockForList">
+                                <React.Fragment>
+                                    Статус: {chooseStatus(this.props.status)}
+                                </React.Fragment>
+                            </div>
+                            <div className="blockForList">
+                                <React.Fragment>
+                                    Формат: {chooseFormatForList(this.props.format)}
+                                </React.Fragment>
+                            </div>
+                        </Typography>
+                    }
+                />
+            )
         } else {
             return (
                 <ListItemText
@@ -65,6 +91,7 @@ class ListDesign extends Component {
                 />
             );
         }
+
     }
 
 

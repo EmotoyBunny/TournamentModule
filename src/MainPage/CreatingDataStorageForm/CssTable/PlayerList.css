@@ -18,3 +18,33 @@
 .avatarAndButton{
     vertical-align: middle;
 }
+
+.table{
+    max-width: 130px;
+}
+
+.blockText {
+    padding-top: 20px;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.blockTable{
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.blockTableFinal{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+}
+
+
+.blockButton1 {
+    width: 100%;
+    text-align: center;
+}
+
+
