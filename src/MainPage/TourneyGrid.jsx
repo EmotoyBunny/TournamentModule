@@ -37,7 +37,7 @@ class TourneyGrid extends Component {
         let id = 1;
         let count =0;
         let len=this.props.listFormat.length;
-        for(let i = 0; i < len; i++){
+        for(let i = 1; i < len; i){
             count++;
             len=len/2;
         }
@@ -52,11 +52,11 @@ class TourneyGrid extends Component {
                         })
                         id++;
                     }
-                    for (let g = 2; g < count; g++) {
+                    for (let g = 2; g <= count; g++) {
                         let list = [];
                         for (let j = 0; j < array.length; j++) {
                             if (array[j].roundType === g - 1)
-                                list.push(array[g])
+                                list.push(array[j])
                         }
                         for (let j = 0; j < list.length / 2; j++)
                             array.push({
@@ -132,7 +132,7 @@ class TourneyGrid extends Component {
                                             <div>
                                                 {item.player}
                                                 <Tooltip color="primary" title="Победитель">
-                                                    <div>
+                                                    <div className="forDiv">
                                                     <IconButton disabled={final}
                                                                 aria-label="delete">
                                                         <DoneAllIcon fontSize="small"/>
@@ -154,14 +154,14 @@ class TourneyGrid extends Component {
                 return <div key={index} className="blockTable">
                     {round}
                     <TableContainer className="table" component={Paper}>
-                        <Table className="table" size="small" aria-label="a dense table">
+                        <Table size="small" aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="left">
                                         <div>
                                             {item.player1}
                                             <Tooltip color="primary" title="Выбрать">
-                                                <div>
+                                                <div className="forDiv">
                                                 <IconButton disabled={button}
                                                             onClick={() => this.handleClick(item.roundType, item.player1, item.id)}
                                                             aria-label="delete">
@@ -179,7 +179,7 @@ class TourneyGrid extends Component {
                                         <div>
                                             {item.player2}
                                             <Tooltip color="primary" title="Выбрать">
-                                                <div>
+                                                <div className="forDiv">
                                                 <IconButton disabled={button}
                                                             onClick={() => this.handleClick(item.roundType, item.player2, item.id)}
                                                             aria-label="delete">

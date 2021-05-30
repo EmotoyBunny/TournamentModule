@@ -20,7 +20,7 @@
 }
 
 .table{
-    max-width: 130px;
+    max-width: 150px;
 }
 
 .blockText {
@@ -47,4 +47,8 @@
     text-align: center;
 }
 
+
+.forDiv{
+    display: inline-block;
+}
 
