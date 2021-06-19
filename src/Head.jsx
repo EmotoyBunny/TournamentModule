@@ -22,6 +22,8 @@ import AddingTourney from "./MainPage/AddingTourney";
 import AddingFormatTourney from "./MainPage/AddingFormatTourney";
 import TourneyGrid from "./MainPage/TourneyGrid";
 
+import logo2 from "./logo2.png"
+
 
 class Head extends Component {
     constructor(props) {
@@ -164,6 +166,7 @@ class Head extends Component {
                     <Container maxWidth='md'>
                         <div className="container1">
                             <AppBar position="fixed">
+                                <img alt="" src={logo2} className="logo"/>
                                 <TabsAppBar/>
                             </AppBar>
                             <Switch>

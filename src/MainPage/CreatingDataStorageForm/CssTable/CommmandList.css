@@ -10,17 +10,38 @@
 }
 
 .sort {
-    text-align:left;
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    width: 25%;
+
+}
+
+.sort3 {
+    text-align: right;
     vertical-align: middle;
     display: inline-block;
     width: 85%;
+
+}
+
+.sort2 {
+    text-align: right;
+    vertical-align: middle;
+    display: inline-block;
+    width: 60%;
+
+}
+
+.sort1 {
+    padding-right: 70px;
 }
 
 .list {
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .block2 {
-    padding-top: 30px;
+    padding-top: 10px;
 }
 

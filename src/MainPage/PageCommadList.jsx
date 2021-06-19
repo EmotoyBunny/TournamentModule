@@ -89,20 +89,22 @@ class MainPage extends Component {
                         </Tooltip>
                     </Link>
                 </div>
-                <div className="sort">
-                    <FormControl size="small" variant="outlined">
-                        <InputLabel>Сортировка</InputLabel>
-                        <Select
-                            native
-                            value={this.state.sortPlayer}
-                            onChange={this.handleChange}
-                            label="Сортировка"
-                            name='sortPlayer'
-                        >
-                            <option value={"name"}>По Названию</option>
-                            <option value={"game"}>По Игре</option>
-                        </Select>
-                    </FormControl>
+                <div className="sort3">
+                    <div className="sort1">
+                        <FormControl size="small" variant="outlined">
+                            <InputLabel>Сортировка</InputLabel>
+                            <Select
+                                native
+                                value={this.state.sortPlayer}
+                                onChange={this.handleChange}
+                                label="Сортировка"
+                                name='sortPlayer'
+                            >
+                                <option value={"name"}>По Названию</option>
+                                <option value={"game"}>По Игре</option>
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 <div className="list">
                     {listArray}

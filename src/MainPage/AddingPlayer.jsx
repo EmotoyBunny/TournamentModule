@@ -11,6 +11,7 @@ import "./CssMainPage/AddingComponent.css"
 
 // components jsx
 import PassageLocal from "./CreatingDataStorageForm/PassageLocal";
+import {Typography} from "@material-ui/core";
 
 class AddingPlayer extends Component {
     constructor(props) {
@@ -136,35 +137,42 @@ class AddingPlayer extends Component {
      * @returns {JSX.Element}
      */
     chooseButton = () => {
-        if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3) {
+        if (this.props.what === "create") {
             return (
                 <Link to="/playerList">
-                    <Button variant="contained" color="primary" size="large"
+                    <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Добавить
                     </Button>
                 </Link>
             )
-        } else if (this.props.what === "edit" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3)
+        } else if (this.props.what === "edit")
             return (
                 <Link to="/playerList">
-                    <Button variant="contained" ccolor="primary" size="large"
+                    <Button variant="contained" disabled={this.correctForm()} ccolor="primary" size="large"
                             onClick={() => this.addItem(this.state.keyForId)}>
                         Изменить
                     </Button>
                 </Link>
             )
-        else
-            return (<div>Заполните обязательные поля!</div>);
+
     }
 
     correctForm = () => {
         return (!(this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3));
     }
 
+
+    topInscription=(what)=>{
+        if(what === "edit")
+            return (<Typography color="primary" variant="h6" paragraph={true} className="blockName">Редактирование игрока</Typography>);
+    }
+
+
     render() {
         return (
             <div className="blockAll">
+                {this.topInscription(this.props.what)}
                 <div className="blockName">
                     <div>
                         <form noValidate autoComplete="off">
@@ -172,7 +180,6 @@ class AddingPlayer extends Component {
                                 <TextField
                                     className="text"
                                     required
-                                    error={this.correctForm()}
                                     label="Ваш никнейм"
                                     variant="filled"
                                     name="name" value={this.state.name} onChange={this.handleChange}

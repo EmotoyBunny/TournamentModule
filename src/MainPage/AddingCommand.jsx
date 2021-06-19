@@ -16,6 +16,7 @@ import "./CssMainPage/AddingComponent.css"
 // jsx components
 import PassageLocal from "./CreatingDataStorageForm/PassageLocal";
 import Tooltip from "@material-ui/core/Tooltip";
+import {Typography} from "@material-ui/core";
 
 
 class AddingCommand extends Component {
@@ -105,26 +106,24 @@ class AddingCommand extends Component {
      * @returns {JSX.Element}
      */
     chooseButton = () => {
-        if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "")
+        if (this.props.what === "create")
             return (
                 <Link to="/commandList">
-                    <Button variant="contained" color="primary" size="large"
+                    <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Добавить
                     </Button>
                 </Link>
             );
-        else if (this.props.what === "edit" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "")
+        else if (this.props.what === "edit" )
             return (
                 <Link to="/commandList">
-                        <Button variant="contained" color="primary" size="large"
+                        <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                                 onClick={() => this.addItem(this.state.key)}>
                             Изменить
                         </Button>
                 </Link>
             );
-        else
-            return (<div>Заполните обязательные поля!</div>);
     }
 
     addingPlayer = () => {
@@ -171,18 +170,19 @@ class AddingCommand extends Component {
         return (<div className="blockName">{listItems}</div>);
     };
 
-    correctForm = (form) => {
-        if (form === "name" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3) {
-            return false;
-        } else if (this.state.game !== "" && form === "game") {
-            return false;
-        }
-        return true;
+    correctForm = () => {
+        return !(this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "");
+    }
+
+    topInscription=(what)=>{
+        if(what === "edit")
+            return (<Typography color="primary" variant="h6" paragraph={true} className="blockName">Редактирование команды</Typography>);
     }
 
     render() {
         return (
             <div className="blockAll">
+                {this.topInscription(this.props.what)}
                 <div className="blockName">
                     <div>
                         <form noValidate autoComplete="off">
@@ -190,7 +190,6 @@ class AddingCommand extends Component {
                                 <TextField
                                     className="text"
                                     required
-                                    error={this.correctForm("name")}
                                     id="outlined-required"
                                     label="Название Команды"
                                     variant="filled"
@@ -207,7 +206,6 @@ class AddingCommand extends Component {
                         <Select
                             className="text"
                             native
-                            error={this.correctForm("game")}
                             value={this.state.game}
                             onChange={this.handleChange}
                             label="Игра"

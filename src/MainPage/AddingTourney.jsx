@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import PassageLocal from "./CreatingDataStorageForm/PassageLocal";
+import {Typography} from "@material-ui/core";
 
 
 class AddingTourney extends Component {
@@ -77,20 +78,20 @@ class AddingTourney extends Component {
 
 
     chooseButton = () => {
-        if (this.props.what === "create" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "" && this.state.format !== "")
+        if (this.props.what === "create")
             return (
                 <Link to={"/addingFormatTourney/" + this.state.count}>
-                    <Button variant="contained" color="primary" size="large"
+                    <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                             onClick={() => this.addItem(this.state.count)}>
                         Продолжить
                     </Button>
                 </Link>
             );
-        else if (this.props.what === "edit" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "" && this.state.format !== "")
+        else if (this.props.what === "edit")
             return (<div className="blockButton5">
                     <div className="blockButton6">
                         <Link to={"/" + this.state.key}>
-                            <Button variant="contained" color="primary" size="large"
+                            <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                                     onClick={() => this.addItem(this.state.key)}>
                                 Сохранить
                             </Button>
@@ -98,7 +99,7 @@ class AddingTourney extends Component {
                     </div>
                     <div className="blockButton6">
                         <Link to={"/editFormatTourney/" + this.state.key}>
-                            <Button variant="contained" color="primary" size="large"
+                            <Button variant="contained" disabled={this.correctForm()} color="primary" size="large"
                                     onClick={() => this.addItem(this.state.key)}>
                                 Продолжить
                             </Button>
@@ -106,23 +107,22 @@ class AddingTourney extends Component {
                     </div>
                 </div>
             );
-        else
-            return (<div>Заполните обязательные поля!</div>);
     }
 
-    correctForm = (form) => {
-        if (form === "name" && this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3) {
-            return false;
-        } else if (this.state.game !== "" && form === "game") {
-            return false;
-        } else if (form === "format" && this.state.format !== "")
-            return false;
-        return true;
+    correctForm = () => {
+        return !(this.state.name !== "" && this.state.name.length < 15 && this.state.name.length >= 3 && this.state.game !== "" && this.state.format !== "")
+    }
+
+
+    topInscription=(what)=>{
+        if(what === "edit")
+            return (<Typography color="primary" variant="h6" paragraph={true} className="blockName">Редактирование турнира</Typography>);
     }
 
     render() {
         return (
             <div className="blockAll">
+                {this.topInscription(this.props.what)}
                 <div className="blockName">
                     <div>
                         <form noValidate autoComplete="off">
@@ -130,7 +130,6 @@ class AddingTourney extends Component {
                                 <TextField
                                     className="text"
                                     required
-                                    error={this.correctForm("name")}
                                     id="outlined-required"
                                     label="Название Турнира"
                                     variant="filled"
@@ -147,7 +146,6 @@ class AddingTourney extends Component {
                         <Select
                             className="text"
                             native
-                            error={this.correctForm("game")}
                             value={this.state.game}
                             onChange={this.handleChange}
                             label="Игра"
@@ -183,7 +181,6 @@ class AddingTourney extends Component {
                         <Select
                             className="text"
                             native
-                            error={this.correctForm("format")}
                             value={this.state.format}
                             onChange={this.handleChange}
                             label="Формат"

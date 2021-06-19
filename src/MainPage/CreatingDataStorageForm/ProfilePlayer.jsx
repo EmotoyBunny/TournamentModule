@@ -16,7 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
 import List from "@material-ui/core/List";
 import ChooseGameImg from "./ChooseGameImg";
-import BackspaceIcon from '@material-ui/icons/Backspace';
+import ForTourneyList from "./ForTourneyList";
 
 
 import TourneyGrid from "../TourneyGrid";
@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         textAlign: "center",
-        paddingTop: 70,
+        paddingTop: 30,
     },
     section1: {
         width: '100%',
-        height: 170,
+        height: 150,
     },
     section2: {
         margin: 20,
@@ -54,12 +54,12 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
     },
     section7: {
-        paddingTop: 20,
+        paddingTop: 10,
         marginLeft: 60,
         textAlign: "left",
     },
     section3: {
-        paddingTop: 20,
+        paddingBottom: 15,
     },
     large: {
         width: theme.spacing(7),
@@ -255,10 +255,8 @@ export default function ProfilesPlayer(props) {
 
         if (props.listFormat.length !== 0) {
             nameTeam =
-                <div>
-                    <Typography component={'span'} className={classes.section3} variant="body1">
-                        Участники турнира: {arrayPlayers}
-                    </Typography>
+                <div className={classes.section3}>
+                    <ForTourneyList array={arrayPlayers}/>
                 </div>
         }
         if ((props.listFormat.length === 2 || props.listFormat.length % 4 === 0) && props.listFormat.length !== 0)
@@ -266,19 +264,19 @@ export default function ProfilesPlayer(props) {
                                        getDataTourney={props.getDataTourney}/>
         if (props.status === "stop") {
             status = <div>
-                <Typography component={'span'} className={classes.section3} variant="body1">
+                <Typography component={'span'} color="primary" className={classes.section3} variant="body1">
                     Статус: Завершен
                 </Typography>
             </div>
         } else if (props.status === "start") {
             status = <div>
-                <Typography component={'span'} className={classes.section3} variant="body1">
+                <Typography component={'span'} color="primary" className={classes.section3} variant="body1">
                     Статус: Начат
                 </Typography>
             </div>
         } else if (props.status === "edit") {
             status = <div>
-                <Typography component={'span'} className={classes.section3} variant="body1">
+                <Typography component={'span'} color="primary" className={classes.section3} variant="body1">
                     Статус: Редактируется
                 </Typography>
             </div>
@@ -289,13 +287,6 @@ export default function ProfilesPlayer(props) {
         <div className={classes.root}>
             <div className={classes.section1}>
                 <div className={classes.section5}>
-                    <Link to={props.link}>
-                        <Tooltip title="Вернуться назад">
-                            <IconButton color="primary" aria-label="back">
-                                <BackspaceIcon fontSize="large"/>
-                            </IconButton>
-                        </Tooltip>
-                    </Link>
                     <Link to={"/edit/" + props.id}>
                         <Tooltip title="Изменить">
                             <IconButton color="primary" aria-label="edit">

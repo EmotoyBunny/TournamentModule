@@ -38,17 +38,25 @@ class ListDesign extends Component {
     info = (who) => {
         if (who === "player" && this.props.team !== "") {
             return (<ListItemText
-                    primary={this.props.name}
+                    primary={<Typography color="textPrimary" component={'span'}>
+                        <div className="text1">
+                            <React.Fragment>
+                                {this.props.name}
+                            </React.Fragment>
+                        </div>
+                        <div className="text2">
+                            <React.Fragment>
+                                <Typography color="textSecondary" component={'span'}>
+                                Участник команды: {this.props.team}
+                                </Typography>
+                            </React.Fragment>
+                        </div>
+                    </Typography>}
                     secondary={
                         <Typography color="textSecondary" component={'span'}>
                             <div className="blockForList">
                                 <React.Fragment>
                                     {this.props.game}
-                                </React.Fragment>
-                            </div>
-                            <div className="blockForList">
-                                <React.Fragment>
-                                    Участник команды: {this.props.team}
                                 </React.Fragment>
                             </div>
                         </Typography>
@@ -57,22 +65,34 @@ class ListDesign extends Component {
             );
         } else if (who === "tourney") {
             return (<ListItemText
-                    primary={this.props.name}
+                    primary={<Typography color="textPrimary" component={'span'}>
+                        <div className="text1">
+                            <React.Fragment>
+                                {this.props.name}
+                            </React.Fragment>
+                        </div>
+                        <div className="text2">
+                            <React.Fragment>
+                                <Typography color="textSecondary" component={'span'}>
+                                    {this.props.game}
+                                </Typography>
+                            </React.Fragment>
+                        </div>
+                    </Typography>}
                     secondary={
                         <Typography color="textSecondary" component={'span'}>
-                            <div className="blockForList">
+                            <div className="text1">
                                 <React.Fragment>
-                                    {this.props.game}
-                                </React.Fragment>
-                            </div>
-                            <div className="blockForList">
-                                <React.Fragment>
+                                    <Typography color="primary" component={'span'}>
                                     Статус: {chooseStatus(this.props.status)}
+                                    </Typography>
                                 </React.Fragment>
                             </div>
-                            <div className="blockForList">
+                            <div className="text2">
                                 <React.Fragment>
+                                    <Typography color="textSecondary" component={'span'}>
                                     Формат: {chooseFormatForList(this.props.format)}
+                                    </Typography>
                                 </React.Fragment>
                             </div>
                         </Typography>
@@ -82,12 +102,21 @@ class ListDesign extends Component {
         } else {
             return (
                 <ListItemText
-                    primary={this.props.name}
-                    secondary={
-                        <React.Fragment>
-                            {this.props.game}
-                        </React.Fragment>
-                    }
+                    primary={<Typography color="textPrimary" component={'span'}>
+                        <div className="text1">
+                            <React.Fragment>
+                                {this.props.name}
+                            </React.Fragment>
+                        </div>
+                        <div className="text2">
+
+                            <React.Fragment>
+                                <Typography color="textSecondary" component={'span'}>
+                                {this.props.game}
+                                </Typography>
+                            </React.Fragment>
+                        </div>
+                    </Typography>}
                 />
             );
         }
@@ -100,7 +129,7 @@ class ListDesign extends Component {
             <div>
                 <Divider variant="inset"/>
                 <div>
-                    <ListItem alignItems="flex-start">
+                    <ListItem>
                         <Divider variant="inset"/>
                         <ListItemAvatar className="avatarAndButton">
                             <Avatar variant='rounded' src={this.props.img}/>

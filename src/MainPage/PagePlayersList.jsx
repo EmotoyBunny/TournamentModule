@@ -89,7 +89,8 @@ class MainPagePlayers extends Component {
                         </Tooltip>
                     </Link>
                 </div>
-                <div className="sort">
+                <div className="sort3">
+                    <div className="sort1">
                     <FormControl size="small" variant="outlined">
                         <InputLabel>Сортировка</InputLabel>
                         <Select
@@ -103,6 +104,7 @@ class MainPagePlayers extends Component {
                             <option value={"game"}>По Игре</option>
                         </Select>
                     </FormControl>
+                    </div>
                 </div>
                 <div className="list">
                     {listArray}

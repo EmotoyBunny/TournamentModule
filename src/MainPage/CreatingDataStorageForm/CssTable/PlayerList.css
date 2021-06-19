@@ -1,5 +1,5 @@
 .root1 {
-    width: 90%;
+    width: 93%;
 }
 
 .inline {
@@ -7,7 +7,7 @@
 }
 
 .block1 {
-    padding-top: 70px;
+    padding-top: 30px;
     text-align: center;
 }
 
@@ -15,30 +15,39 @@
     display: block;
 }
 
-.avatarAndButton{
+.avatarAndButton {
     vertical-align: middle;
 }
 
-.table{
+.table {
     max-width: 150px;
 }
 
 .blockText {
-    padding-top: 20px;
-    padding-left: 20px;
-    text-align: left;
+    padding-top: 10px;
 }
 
-.blockTable{
-    padding-top: 20px;
+.blockName1 {
+    text-align: center;
+    width: 100%;
+}
+
+.blockTable1 {
+    display: inline-block;
+    padding-top: 10px;
     padding-left: 20px;
 }
 
-.blockTableFinal{
+
+.table1 {
+    display: inline-block;
+    width: 75%;
+    padding-bottom: 10px;
+}
+
+.blockTableFinal {
     padding-top: 20px;
     padding-left: 20px;
-    padding-bottom: 20px;
-
 }
 
 
@@ -48,7 +57,7 @@
 }
 
 
-.forDiv{
+.forDiv {
     display: inline-block;
 }
 
